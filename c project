@@ -1,0 +1,102 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+int n, i;
+int *cid, *houseNo, *meterNo, *prev, *curr, *units;
+float *energy, *total;
+char (*name)[30], (*street)[30], (*city)[20], (*month)[15], (*type)[15];
+
+printf("SMART ENERGY METER SIMULATION\n");  
+
+printf("Enter number of consumers: ");  
+scanf("%d", &n);  
+cid     = (int *)malloc(n * sizeof(int));  
+houseNo = (int *)malloc(n * sizeof(int));  
+meterNo = (int *)malloc(n * sizeof(int));  
+prev    = (int *)malloc(n * sizeof(int));  
+curr    = (int *)malloc(n * sizeof(int));  
+units   = (int *)malloc(n * sizeof(int));  
+
+energy = (float *)malloc(n * sizeof(float));  
+total  = (float *)malloc(n * sizeof(float));
+
+name   = (char (*)[30])malloc(n * sizeof(name));
+street = (char ()[30])malloc(n * sizeof(street));
+city   = (char ()[20])malloc(n * sizeof(city));
+month  = (char ()[15])malloc(n * sizeof(month));
+type   = (char ()[15])malloc(n * sizeof(*type));
+
+for (i = 0; i < n; i++) {  
+    printf("\n--- Consumer %d Input ---\n", i + 1);  
+
+    printf("Consumer ID        : ");  
+    scanf("%d", &cid[i]);  
+
+    printf("Consumer Name      : ");  
+    scanf(" %[^\n]", name[i]);  
+
+    printf("House Number       : ");  
+    scanf("%d", &houseNo[i]);  
+
+    printf("Street Name        : ");  
+    scanf(" %[^\n]", street[i]);  
+
+    printf("City               : ");  
+    scanf(" %[^\n]", city[i]);  
+
+    printf("Meter Number       : ");  
+    scanf("%d", &meterNo[i]);  
+
+    printf("Meter Type         : ");  
+    scanf(" %s", type[i]);  
+
+    printf("Billing Month      : ");  
+    scanf(" %s", month[i]);  
+
+    printf("Previous Reading   : ");  
+    scanf("%d", &prev[i]);  
+
+    printf("Current Reading    : ");  
+    scanf("%d", &curr[i]);  
+
+    units[i] = curr[i] - prev[i];  
+    energy[i] = units[i] * 2;   // simple rate  
+    total[i] = energy[i] + 50;  // fixed charge  
+}  
+
+printf("\n\n=========== ELECTRICITY BILL DETAILS ===========\n");  
+
+for (i = 0; i < n; i++) {  
+    printf("\nBill Number      : EB2025%d", i + 1);  
+    printf("\nConsumer ID      : %d", cid[i]);  
+    printf("\nConsumer Name    : %s", name[i]);  
+    printf("\nAddress          : %d, %s, %s",  
+           houseNo[i], street[i], city[i]);  
+    printf("\nMeter Number     : %d", meterNo[i]);  
+    printf("\nMeter Type       : %s", type[i]);  
+    printf("\nBilling Month    : %s", month[i]);  
+    printf("\nPrevious Reading : %d units", prev[i]);  
+    printf("\nCurrent Reading  : %d units", curr[i]);  
+    printf("\nUnits Consumed   : %d units", units[i]);  
+    printf("\nRate per Unit    : ₹2.00");  
+    printf("\nEnergy Charge    : ₹%.2f", energy[i]);  
+    printf("\nFixed Charge     : ₹50.00 (Meter Service)");  
+    printf("\nTOTAL PAYABLE    : ₹%.2f", total[i]);  
+
+    if (units[i] <= 100)  
+        printf("\nUsage Status     : LOW CONSUMPTION");  
+    else  
+        printf("\nUsage Status     : HIGH CONSUMPTION");  
+
+    printf("\nPayment Status   : NOT PAID");  
+    printf("\nNote             : Please pay before due date");  
+free(cid); free(houseNo); free(meterNo);  
+free(prev); free(curr); free(units);  
+free(energy); free(total);  
+free(name); free(street); free(city);  
+free(month); free(type);  
+
+return 0;
+
+}
