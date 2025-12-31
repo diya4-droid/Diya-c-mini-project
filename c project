@@ -22,10 +22,10 @@ energy = (float *)malloc(n * sizeof(float));
 total  = (float *)malloc(n * sizeof(float));
 
 name   = (char (*)[30])malloc(n * sizeof(name));
-street = (char ()[30])malloc(n * sizeof(street));
-city   = (char ()[20])malloc(n * sizeof(city));
-month  = (char ()[15])malloc(n * sizeof(month));
-type   = (char ()[15])malloc(n * sizeof(*type));
+street = (char (*)[30])malloc(n * sizeof(street));
+city   = (char (*)[20])malloc(n * sizeof(city));
+month  = (char (*)[15])malloc(n * sizeof(month));
+type   = (char (*)[15])malloc(n * sizeof(*type));
 
 for (i = 0; i < n; i++) {  
     printf("\n--- Consumer %d Input ---\n", i + 1);  
@@ -98,5 +98,5 @@ free(name); free(street); free(city);
 free(month); free(type);  
 
 return 0;
-
+}
 }
